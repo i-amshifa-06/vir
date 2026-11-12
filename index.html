@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave management system</title>
+</head>
+<body>
+    
+    <h2>Leave Management System</h2>
+    <p>casual leaves: <span id="c">12</span></p>
+    <p>Medical leaves: <span id="m">10</span></p>
+
+    <input type="text" id="name" placeholder="Enter your name">
+    <select id="type">
+        <option value="c">Casual</option>
+        <option value="m">Medical</option>
+    </select>
+    <input type="number" id="days" placeholder="Enter number of days">
+    <button onclick="applyLeave()">Apply for leave</button>
+
+    <p id="message"></p>
+
+    <script>
+        let c=12, m=10;
+        function applyLeave() {
+            let n = document.getElementById("name").value;
+            let t = document.getElementById("type").value;
+            let d = Number(document.getElementById("days").value);
+
+            if (!n || d <= 0) {
+                document.getElementById("message").innerText = "Please enter valid name and number of days.";
+                return;
+            }
+
+            if (t=="c" && d <= c) {
+                c -= d;
+                document.getElementById("c").innerText = c;
+                document.getElementById("message").innerText = `Leave approved for ${n}. Remaining casual leaves: ${c}`;
+            } else if (t=="m" && d <= m) {
+                m -= d;
+                document.getElementById("m").innerText = m;
+                document.getElementById("message").innerText = `Leave approved for ${n}. Remaining medical leaves: ${m}`;
+            } else {
+                document.getElementById("message").innerText = "Not enough leave balance.";
+            }
+
+        }
+            
+    </script>
+</body>
+</html>
